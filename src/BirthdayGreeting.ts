@@ -1,5 +1,7 @@
+require('dotenv').config();
+
 interface Email {
-    email: string
+    emailName: string
 }
 
 interface BirthdayMailer {
@@ -9,14 +11,23 @@ interface BirthdayMailer {
 export class DefaultMailer implements BirthdayMailer {
     sendEmail(emailString : string) : string {
         const email : Email = {
-            email: emailString
+            emailName: emailString
         };
         return 'Email was send'
     }
 }
 
 export class BirthdayGreeting {
-    happyBirthday() {
-        return 'Happy birthday!'
+    happyBirthday(name: string, email: Email) {
+        const mail = {
+            from: {
+                name: 'Birthday',
+                address: process.env.EMAIL
+            },
+            to: email.emailName,
+            subject: "Happy Birthday", // Subject line
+            text: "Happy birthday, dear" + name + "!", // plain text body
+        };
+        return mail
     }
 }
