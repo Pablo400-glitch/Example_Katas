@@ -1,5 +1,6 @@
 require("dotenv").config()
 const nodemailer = require("nodemailer")
+import * as fs from 'fs';
 
 interface Email {
   emailName: string
@@ -12,7 +13,7 @@ interface EmailOptions {
   }
   to: string
   subject: string
-  text: string
+  html: string
 }
 
 interface BirthdayBoyData {
@@ -30,18 +31,44 @@ interface BirthdayMailer {
   sendEmail(mailOptions: EmailOptions): Promise<string>
 }
 
+export class BirthdayBoyDataFile implements GetBirthdayBoyData {
+    getData(filename: string): BirthdayBoyData {
+      const content = fs.readFileSync(filename, 'utf-8');
+  
+      const data = content.split(', ');
+  
+      const date = new Date(data[2])
+      const formatedDate = date.toISOString()
+  
+      const BirthdayBoy = {
+        last_name: data[0],
+        first_name: data[1],
+        date_of_birth: new Date(formatedDate),
+        email: {
+          emailName: data[3],
+        },
+      }
+  
+      return BirthdayBoy
+    }
+  }
+
 export class BirthdayGreeting {
-  happyBirthday(name: string, email: Email) {
+  happyBirthday(birthdaysData: BirthdayBoyData) {
     const mail: EmailOptions = {
       from: {
         name: "Birthday",
         address: process.env.EMAIL,
       },
-      to: email.emailName,
+      to: birthdaysData.email.emailName,
       subject: "Happy Birthday", // Subject line
-      text: "Happy birthday, dear " + name + "!", // plain text body
+      html: `<p>Happy birthday, dear <strong>${birthdaysData.first_name} ${birthdaysData.last_name}</strong>!</p>`, 
     }
-    return mail
+    if (birthdaysData.date_of_birth === new Date()) {
+        return mail
+    } else {
+        return "Is not your Birthday"
+    }
   }
 }
 
@@ -62,29 +89,13 @@ export class DefaultMailer implements BirthdayMailer {
     })
 
     try {
-      await transporter.sendMail(mailOptions)
-      console.log("Email has been sent!")
-      return "Email was sent successfully"
+        await transporter.sendMail(mailOptions)
+        return "Email was sent successfully"
     } catch (error) {
-      console.error("Error sending email:", error)
-      throw new Error("Failed to send email")
+        console.error("Error sending email:", error)
+        throw new Error("Failed to send email")
     }
   }
 }
 
-export class BirthdayBoyDataFile implements GetBirthdayBoyData {
-  getData(filename: string): BirthdayBoyData {
-    
 
-    const BirthdayBoy = {
-      last_name: "González Galván",
-      first_name: "Adrián",
-      date_of_birth: new Date("2024-03-11T00:00:00.000Z"),
-      email: {
-        emailName: "paisficretpablo@gmail.com",
-      },
-    }
-
-    return BirthdayBoy
-  }
-}
