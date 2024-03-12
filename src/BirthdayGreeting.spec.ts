@@ -1,54 +1,65 @@
 import { describe, it, expect } from "vitest"
-import { BirthdayGreeting, DefaultMailer, BirthdayBoyDataFile } from "./BirthdayGreeting.js"
+import { BirthdayGreeting, DefaultMailer, BirthdayBoyDataFile} from "./BirthdayGreeting.js"
 require('dotenv').config();
-import * as fs from 'fs';
 
 const filename = '/home/pablo/Example_Katas/src/birthdayboys.txt'
 
-const content = fs.readFileSync(filename, 'utf-8');
-  
-const data = content.split(', ');
-  
-const date = new Date(data[2])
-const formatedDate = date.toISOString()
-  
-const birthdayBoy = {
-    last_name: data[0],
-    first_name: data[1],
-    date_of_birth: new Date(formatedDate),
-    email: {
-        emailName: data[3],
-    },
-}
-
-const mailOptions = {
-    from: {
-        name: 'Birthday',
-        address: process.env.EMAIL
-    },
-    to: birthdayBoy.email.emailName,
-    subject: "Happy Birthday", // Subject line
-    html: `<p>Happy birthday, dear <strong>${birthdayBoy.first_name} ${birthdayBoy.last_name}</strong>!</p>`,
-};
-
+const birthdayBoy = new BirthdayBoyDataFile()
+const birthdayBoys = birthdayBoy.getData(filename)
 
 describe("Birthday Greetings", () => {
   it("display Happy Birthday on the Email options", () => {
     const birthdayGreeting = new BirthdayGreeting()
 
-    const birthday = birthdayGreeting.happyBirthday(birthdayBoy)
+    birthdayBoys.map((boy) => {
+      const birthday = birthdayGreeting.happyBirthday(boy)
+      const mailOptions = {
+        from: {
+            name: 'Birthday',
+            address: process.env.EMAIL
+        },
+        to: boy.email.emailName,
+        subject: "Happy Birthday", // Subject line
+        html: `<p>Happy birthday, dear <strong>${boy.first_name} ${boy.last_name}</strong>!</p>`,
+      };
 
-    expect(birthday).toBe("Is not your Birthday")
+      expect(birthday).toStrictEqual(mailOptions)
+    })
   })
 
   it("display that the email was send", async () => {
     const defaultMailer = new DefaultMailer()
+    const emailPromises: Promise<string>[] = [];
+
+    birthdayBoys.forEach(async (boy) => {
+      const mailOptions = {
+        from: {
+          name: 'Birthday',
+          address: process.env.EMAIL
+        },
+        to: boy.email.emailName,
+        subject: "Happy Birthday", // Subject line
+        html: `<p>Happy birthday, dear <strong>${boy.first_name} ${boy.last_name}</strong>!</p>`,
+      };
+        
+      const promise = defaultMailer.sendEmail(mailOptions, boy)
+      .then(result => {
+        expect(result).toBe("Email was sent successfully");
+        return result;
+      })
+      .catch(error => {
+        throw error;
+      });
+
+      emailPromises.push(promise);
+    });
 
     try {
-        const result = await defaultMailer.sendEmail(mailOptions);
-        expect(result).toBe('Email has been sent!');
+      const results = await Promise.all(emailPromises);
+  
+      expect(results.every(result => result === "Email was sent successfully")).toBe(true);
     } catch (error) {
-        expect(error instanceof Error).toBe(true);
+      expect(error instanceof Error).toBe(true);
     }
   })
 
@@ -57,6 +68,6 @@ describe("Birthday Greetings", () => {
 
     const birthday = birthdayGreeting.getData(filename)
 
-    expect(birthday).toStrictEqual(birthdayBoy)
+    expect(birthday).toStrictEqual(birthdayBoys)
   })
 })
