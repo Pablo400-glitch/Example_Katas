@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest"
 import { BirthdayGreeting, DefaultMailer, BirthdayBoyDataFile} from "./BirthdayGreeting.js"
 require('dotenv').config();
 
-const filename = '/home/pablo/Example_Katas/src/birthdayboys.txt'
+const filename = './src/birthdayboys.txt'
 
 const birthdayBoy = new BirthdayBoyDataFile()
 const birthdayBoys = birthdayBoy.getData(filename)
