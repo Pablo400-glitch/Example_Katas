@@ -1,3 +1,11 @@
-export function myFunction() {
-  return true
+export class Anagram {
+  word: string
+
+  constructor(word: string) {
+    this.word = word
+  }
+
+  getAnagram() {
+    return this.word
+  }
 }
