@@ -11,6 +11,6 @@ describe("Default test", () => {
       second_anagram: "documenting"
     }
 
-    expect(result).toBe(words)
+    expect(result).toStrictEqual(words)
   })
 })
