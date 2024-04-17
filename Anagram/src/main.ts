@@ -1,3 +1,8 @@
+export type Anagrams = {
+  first_anagram: string,
+  second_anagram: string
+}
+
 export class Anagram {
   word: string
 
