@@ -12,6 +12,7 @@ export class Anagram {
   getAnagram(): Anagrams {
     let first_anagram = this.word
     let second_anagram = this.word
+
     return {
       first_anagram, 
       second_anagram
