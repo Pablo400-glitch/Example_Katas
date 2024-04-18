@@ -6,22 +6,13 @@ describe("Anagram test", () => {
     const anagram = new Anagram("documenting")
     const result = anagram.getAnagram()
 
-    const words: Anagrams = {
-      first_anagram: "documenting", 
-      second_anagram: "documenting"
-    }
-
-    expect(result).toStrictEqual(words)
+    expect(result.first_anagram.length).toBe(11)
+    expect(result.second_anagram.length).toBe(11)
   })
 
   it("Scrambling word", () => {
     const anagram = new Anagram("documenting")
     const result = anagram.scrambleWord(anagram.word)
-
-    const words: Anagrams = {
-      first_anagram: "documenting", 
-      second_anagram: "documenting"
-    }
 
     expect(result.length).toBe(11)
   })

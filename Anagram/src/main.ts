@@ -12,27 +12,22 @@ export class Anagram {
   }
 
   getAnagram(): Anagrams {
-    let first_anagram = this.word
-    let second_anagram = this.word
-
     return {
-      first_anagram, 
-      second_anagram
+      first_anagram: this.scrambleWord(this.word), 
+      second_anagram: this.scrambleWord(this.word)
     }
   }
 
   scrambleWord(word: string): string {
     const wordArray = word.split('')
     let scrambledWord = ['']
-    const wordLength = word.length - 1
+    const wordLength = wordArray.length
 
-    for (let i = 0; i <= wordLength + 1; i++) {
+    for (let i = 0; i <= wordLength; i++) {
       let randomPos = Math.floor(Math.random() * (wordArray.length));
       scrambledWord[i] = wordArray[randomPos]
       wordArray.splice(randomPos, 1);
     }
-
-    console.log(scrambledWord.join(''))
 
     return scrambledWord.join('')
   }
