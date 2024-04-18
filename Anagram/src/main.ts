@@ -20,7 +20,7 @@ export class Anagram {
 
   scrambleWord(word: string): string {
     const wordArray = word.split('')
-    let scrambledWord = ['']
+    let scrambledWord = []
     const wordLength = wordArray.length
 
     for (let i = 0; i <= wordLength; i++) {
