@@ -1,9 +1,10 @@
 import { describe, it, expect } from "vitest"
-import { myFunction } from "./main.js"
+import { LeapYear } from "./main.js"
 
 describe("Default test", () => {
   it("should work", () => {
-    const result = myFunction()
+    const leapYear = new LeapYear(1600)
+    const result = leapYear.isLeapYear()
 
     expect(result).toBe(true)
   })
