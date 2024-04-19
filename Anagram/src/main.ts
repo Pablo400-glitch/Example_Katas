@@ -20,15 +20,15 @@ export class Anagram {
 
   scrambleWord(word: string): string {
     const wordArray = word.split('')
-    let scrambledWord = []
-    const wordLength = wordArray.length
+    const n = wordArray.length
 
-    for (let i = 0; i <= wordLength; i++) {
-      let randomPos = Math.floor(Math.random() * (wordArray.length));
-      scrambledWord[i] = wordArray[randomPos]
-      wordArray.splice(randomPos, 1);
+    for (let i = n - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      const temp = wordArray[i]
+      wordArray[i] = wordArray[j];
+      wordArray[j] = temp;
     }
 
-    return scrambledWord.join('')
+    return wordArray.join('')
   }
 }

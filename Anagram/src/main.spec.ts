@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest"
-import { Anagram, Anagrams } from "./main.js"
+import { Anagram } from "./main.js"
 
 describe("Anagram test", () => {
   it("Create Anagram", () => {
