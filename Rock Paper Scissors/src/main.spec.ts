@@ -7,6 +7,6 @@ describe("Default test", () => {
     const rockPaperScissors = new RockPaperScissors(playerElection)
     const result = rockPaperScissors.Game()
 
-    expect(result).toBe("I have chosen rock")
+    expect(result).toBe("You won!!!")
   })
 })
