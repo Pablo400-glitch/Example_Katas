@@ -8,16 +8,13 @@ export class LeapYear{
   isLeapYear(): boolean {
     if (this.year % 100 === 0 && this.year % 400 != 0)
       return false
-
-    if (this.year % 4 != 0)
+    else if (this.year % 4 != 0)
       return false
-
-    if (this.year % 4 === 0)
+    else if (this.year % 4 === 0)
       return true
-
-    if (this.year % 400 === 0)
+    else if (this.year % 400 === 0)
       return true
-
+    else
     return false
   }
 }
