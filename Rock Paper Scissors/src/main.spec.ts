@@ -4,7 +4,8 @@ import { RockPaperScissors } from "./main.js"
 describe("Default test", () => {
   it("should work", () => {
     const playerElection = "Rock"
-    const rockPaperScissors = new RockPaperScissors(playerElection)
+    const enemyElection = "Scissors"
+    const rockPaperScissors = new RockPaperScissors(playerElection, enemyElection)
     const result = rockPaperScissors.Game()
 
     expect(result).toBe("You won!!!")
