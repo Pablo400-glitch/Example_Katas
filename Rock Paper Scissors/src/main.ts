@@ -23,12 +23,12 @@ export class RockPaperScissors {
   isValidElection(choice: any): choice is Elections {
     return Object.values(Elections).includes(choice);
   }
-
+  
   Game() {
-    this.enemyElection = "Scissors"
     if (this.playerElection === "Rock" && this.enemyElection === "Scissors")
       return "You won!!!"
-    else 
-      return "You lose"
+
+    
+    return "You lose"
   }
 }
