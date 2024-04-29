@@ -7,7 +7,7 @@ export enum Elections {
 export class RockPaperScissors {
   private playerElection: string
   private enemyElection: string
-  
+
   constructor(playerElection: string, enemyElection: string) {
     if (this.isValidElection(playerElection))
       this.playerElection = playerElection
@@ -29,6 +29,6 @@ export class RockPaperScissors {
     if (this.playerElection === "Rock" && this.enemyElection === "Scissors")
       return "You won!!!"
     else 
-      return "Lost"
+      return "You lose"
   }
 }
