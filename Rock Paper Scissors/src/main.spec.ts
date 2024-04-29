@@ -20,6 +20,15 @@ describe("RockPaperScissors", () => {
   
       expect(result).toBe("You won!!!")
     })
+
+    it("Scissors vs Paper", () => {
+      const playerElection = "Scissors"
+      const enemyElection = "Paper"
+      const rockPaperScissors = new RockPaperScissors(playerElection, enemyElection)
+      const result = rockPaperScissors.Game()
+  
+      expect(result).toBe("You won!!!")
+    })
   })
 
   describe("You lost the game", () => {
@@ -35,6 +44,15 @@ describe("RockPaperScissors", () => {
     it("Rock vs Paper", () => {
       const playerElection = "Rock"
       const enemyElection = "Paper"
+      const rockPaperScissors = new RockPaperScissors(playerElection, enemyElection)
+      const result = rockPaperScissors.Game()
+  
+      expect(result).toBe("You lose")
+    })
+
+    it("Paper vs Scissors", () => {
+      const playerElection = "Paper"
+      const enemyElection = "Scissors"
       const rockPaperScissors = new RockPaperScissors(playerElection, enemyElection)
       const result = rockPaperScissors.Game()
   
