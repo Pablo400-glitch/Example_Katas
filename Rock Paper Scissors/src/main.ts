@@ -29,6 +29,8 @@ export class RockPaperScissors {
       return "You won!!!"
     if (this.playerElection === "Paper" && this.enemyElection === "Rock")
       return "You won!!!"
+    if (this.playerElection === "Scissors" && this.enemyElection === "Paper")
+      return "You won!!!"
     
     return "You lose"
   }
