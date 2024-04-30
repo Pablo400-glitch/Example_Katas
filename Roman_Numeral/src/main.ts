@@ -1,7 +1,7 @@
 export class RomanNumeral {
-  private amount: string
+  private amount: number
 
-  constructor(amount: string) {
+  constructor(amount: number) {
     this.amount = amount
   }
 
