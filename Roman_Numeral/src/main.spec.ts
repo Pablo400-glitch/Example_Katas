@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest"
-import { myFunction } from "./main.js"
+import { RomanNumeral } from "./main.js"
 
 describe("RomanNumeral", () => {
   it("should work", () => {
