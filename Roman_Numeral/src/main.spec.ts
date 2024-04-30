@@ -24,7 +24,23 @@ describe("RomanNumeral", () => {
       expect(result).toBe('III')
     })
   })
+
+  describe("Special Roman Numbers", () => {
+    it("should return IV", () => {
+      const romanNumeral = new RomanNumeral(4)
+      const result = romanNumeral.Convert()
   
+      expect(result).toBe('IV')
+    })
+
+    it("should return IX", () => {
+      const romanNumeral = new RomanNumeral(9)
+      const result = romanNumeral.Convert()
+  
+      expect(result).toBe('IX')
+    })
+  })
+
   describe("Main Roman Numbers", () => {
     it("should return V", () => {
       const romanNumeral = new RomanNumeral(5)
