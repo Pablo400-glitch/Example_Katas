@@ -15,6 +15,16 @@ export class RomanNumeral {
   }
 
   Convert(): string {
-    return this.romanNumbers[this.amount]
+    let result = ""
+
+    if (this.amount === 2 || this.amount === 3) {
+      for (let i = 0; i < this.amount; i++) {
+        result += this.romanNumbers[1]
+      }
+    } else {
+      result = this.romanNumbers[this.amount]
+    }
+
+    return result
   }
 }

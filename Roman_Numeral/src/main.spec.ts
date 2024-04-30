@@ -2,15 +2,30 @@ import { describe, it, expect } from "vitest"
 import { RomanNumeral } from "./main.js"
 
 describe("RomanNumeral", () => {
-
-  describe("Main Roman Numbers", () => {
+  describe("Roman Numbers with only I symbols", () => {
     it("should return I", () => {
       const romanNumeral = new RomanNumeral(1)
       const result = romanNumeral.Convert()
   
       expect(result).toBe('I')
     })
+
+    it("should return II", () => {
+      const romanNumeral = new RomanNumeral(2)
+      const result = romanNumeral.Convert()
   
+      expect(result).toBe('II')
+    })
+
+    it("should return III", () => {
+      const romanNumeral = new RomanNumeral(3)
+      const result = romanNumeral.Convert()
+  
+      expect(result).toBe('III')
+    })
+  })
+  
+  describe("Main Roman Numbers", () => {
     it("should return V", () => {
       const romanNumeral = new RomanNumeral(5)
       const result = romanNumeral.Convert()
