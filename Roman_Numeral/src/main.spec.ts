@@ -41,6 +41,8 @@ describe("RomanNumeral", () => {
     })
   })
 
+
+
   describe("Main Roman Numbers", () => {
     it("should return V", () => {
       const romanNumeral = new RomanNumeral(5)
@@ -82,6 +84,29 @@ describe("RomanNumeral", () => {
       const result = romanNumeral.Convert()
   
       expect(result).toBe('M')
+    })
+  })
+
+  describe("Other Roman Numbers", () => {
+    it("should return VI", () => {
+      const romanNumeral = new RomanNumeral(6)
+      const result = romanNumeral.Convert()
+  
+      expect(result).toBe('VI')
+    })
+
+    it("should return VII", () => {
+      const romanNumeral = new RomanNumeral(7)
+      const result = romanNumeral.Convert()
+  
+      expect(result).toBe('VII')
+    })
+
+    it("should return VIII", () => {
+      const romanNumeral = new RomanNumeral(8)
+      const result = romanNumeral.Convert()
+  
+      expect(result).toBe('VIII')
     })
   })
 })
